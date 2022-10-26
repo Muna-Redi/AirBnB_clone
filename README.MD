@@ -32,6 +32,17 @@ It’s exactly the same as the shell but limited to a specific use-case. In our 
 
 * Destroy an object
 
+The first piece is to manipulate a powerful storage system. This storage engine will give us
+an abstraction between “My object” and “How they are stored and persisted”. This means: from our
+console code (the command interpreter itself) and from the front-end and RestAPI we will build
+later, for this part of the project, we won’t have to pay attention (take care) of how our objects
+are stored.
+
+This abstraction will also allow us to change the type of storage easily without updating all of
+our codebase. The console will be a tool to validate this storage engine
+
+![layout](program-layout.png)
+
 ## USAGE
 
 ### Execution
