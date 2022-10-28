@@ -24,13 +24,33 @@ class BaseModel:
             the current datetime
             to_dict: returns a dictionary representation of the object
     """
-    def __init__(self):
+    id = str(uuid.uuid4())
+    created_at = datetime.now()
+    updated_at = datetime.now()
+
+    def __init__(self, *args, **kwargs):
         """
             initializes a new instance with required attribute of the class
+            args:
+                args (list): list of arguments
+
+                kwargs (dict): a key word arguments corresponding to the
+                    class attributes and their values
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if kwargs is not None or len(kwargs) > 0:
+            for key, value in kwargs.items():
+                if key in ["created_at", "updated_at"]:
+                    hold = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    self.__dict__[key] = hold
+
+                elif key is "id":
+                    self.id == value
+                else:
+                    self.__dict__[key] = value
+        else:
+            self.id = str(uuid.uuid4())
+            self.updated_at = datetime.now()
+            self.created_at = datetime.now()
 
     def __str__(self):
         """ str method for class BaseModel"""
