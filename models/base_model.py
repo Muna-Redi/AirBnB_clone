@@ -7,6 +7,7 @@
 
 from datetime import datetime
 import uuid
+import models
 
 
 class BaseModel:
@@ -24,10 +25,6 @@ class BaseModel:
             the current datetime
             to_dict: returns a dictionary representation of the object
     """
-    id = str(uuid.uuid4())
-    created_at = datetime.now()
-    updated_at = datetime.now()
-
     def __init__(self, *args, **kwargs):
         """
             initializes a new instance with required attribute of the class
@@ -37,7 +34,7 @@ class BaseModel:
                 kwargs (dict): a key word arguments corresponding to the
                     class attributes and their values
         """
-        if kwargs is not None or len(kwargs) > 0:
+        if kwargs is not None and (len(kwargs) > 0):
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
                     hold = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
@@ -51,6 +48,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.updated_at = datetime.now()
             self.created_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """ str method for class BaseModel"""
@@ -60,6 +58,7 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """ returns a dictionary of all keys and values od __dict__ of

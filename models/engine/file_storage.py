@@ -4,6 +4,7 @@
 
 import json
 from models.base_model import BaseModel
+import models
 
 class FileStorage:
     """ 
@@ -21,7 +22,7 @@ class FileStorage:
             save: serilizes __objects to the json file
             reload
     """
-    __file_path = "file.json"
+    __file_path = "storage.json"
     __objects = dict()
 
     def __init__(self):
