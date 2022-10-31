@@ -3,6 +3,7 @@
 
 
 import cmd
+from models import storage
 from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
@@ -48,8 +49,33 @@ class HBNBCommand(cmd.Cmd):
 
         else:
             new_model = BaseModel()
-            print(new_model.id)
             new_model.save()
+            print(new_model.id)
 
+    def do_show(self, line):
+        """ prints the string representtion of an instance based on id """
+
+        args = line.split()
+        if len(args) < 1:
+            print("** class name missing **")
+
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+
+        elif len(args) < 2:
+             print("** instance id missing **")
+
+        else:
+            objs = storage.all()
+            key = "{}.{}".format(args[0], args[1])
+            if key in objs.keys():
+                string = objs[key].__str__()
+                print(string)
+            else:
+                print("** no instance id found **")
+
+        def do_destroy(self):
+           """ delets an instance of a class """
+             
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
