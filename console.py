@@ -20,8 +20,6 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb)"
 
-    intro = "\n\nWELCOME TO hbnb CONSOLE Have Fun....\n\n"
-
     def emptyline(self):
         """ method to do nothing when an empty line is parsed """
 
