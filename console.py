@@ -21,6 +21,39 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb)"
 
+    @staticmethod
+    def check_class(line):
+        """ method to confirm class is present and exist """
+
+        arg_list = line.split()
+
+        if len(arg_list) < 1:
+            print("** class name missing **")
+            return False
+
+        elif arg_list[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return False
+
+        else:
+            return True
+
+    @staticmethod
+    def check_id(line):
+        arg_list = line.split()
+
+        if len(arg_list) < 2:
+             print("** instance id missing **")
+             return False
+
+        objs = storage.all()
+        key = "{}.{}".format(arg_list[0], arg_list[1])
+        if key not in objs.keys():
+            print("** no instance id found **")
+            return False
+        else:
+            return True
+        
     def emptyline(self):
         """ method to do nothing when an empty line is parsed """
 
@@ -41,13 +74,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         """ creates a new instance of BaseModel"""
 
-        if not line:
-            print("** class name missing **")
-
-        elif line != "BaseModel":
-            print("** class doesn't exist **")
-
-        else:
+        if self.check_class(line) is True:
             new_model = BaseModel()
             new_model.save()
             print(new_model.id)
@@ -55,27 +82,63 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         """ prints the string representtion of an instance based on id """
 
+        if (self.check_class(line) is False) or (self.check_id(line) is False):
+            return
+
+        objs = storage.all()
         args = line.split()
-        if len(args) < 1:
-            print("** class name missing **")
+        key = "{}.{}".format(args[0], args[1])
+        string = objs[key].__str__()
+        print(string)
 
-        elif args[0] != "BaseModel":
-            print("** class doesn't exist **")
+    def do_destroy(self, line):
+        """ delets an instance of a class """
 
-        elif len(args) < 2:
-             print("** instance id missing **")
+        if (self.check_class(line) is False) or (self.check_id(line) is False):
+            return
+        args = line.split()
+        key = "{}.{}".format(args[0], args[1])
+        del storage.all()[key]
+        storage.save()
 
-        else:
+    def do_all(self, line):
+        """" prints __str__ of all instances based or not on class"""
+
+        if len(line.split()) == 0:
             objs = storage.all()
-            key = "{}.{}".format(args[0], args[1])
-            if key in objs.keys():
-                string = objs[key].__str__()
-                print(string)
-            else:
-                print("** no instance id found **")
+            for key, value in objs.items():
+                print(value.__str__())
+            return
 
-        def do_destroy(self):
-           """ delets an instance of a class """
-             
+        if self.check_class(line) is False:
+            return
+
+        objs = storage.all()
+        for key, value in objs.items():
+            if isinstance(value, BaseModel):
+                print(value.__str__())
+
+    def do_update(self, line):
+        """ updates the attributes of an instance """
+
+        if (self.check_class(line) is False) or (self.check_id(line) is False):
+            return
+
+        if len(line.split()) < 3:
+            print("** attribute name missing **")
+            return
+
+        if len(line.split()) < 4:
+            print("** value missing **")
+            return
+
+        objs = storage.all()
+        args = line.split()
+        anchor = "{}.{}".format(args[0], args[1])
+        if anchor in objs.keys():
+            setattr(objs[anchor], args[2], args[3])
+        storage.save()
+        
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

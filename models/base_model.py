@@ -40,7 +40,7 @@ class BaseModel:
                     hold = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                     self.__dict__[key] = hold
 
-                elif key is "id":
+                elif key == "id":
                     self.id = value
                 else:
                     self.__dict__[key] = value
