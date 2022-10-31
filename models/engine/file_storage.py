@@ -6,15 +6,18 @@ import json
 from models.base_model import BaseModel
 import models
 
+
 class FileStorage:
-    """ 
+    """
         this class serializes/deserializes our objects in Json
         for storage and retreival
 
         Attributes:
-            __file_path (str): path to the json file that will store all objects
+            __file_path (str): path to the json file that will store all
+            objects
 
-            __objects (dict): dictionary containing all objects with key classname.id
+            __objects (dict): dictionary containing all objects with key
+            classname.id
 
         Methods:
             all: returns the the dictionary of all objects
@@ -35,13 +38,12 @@ class FileStorage:
         return FileStorage.__objects
 
     def new(self, obj):
-        """ 
+        """
             This method sets a new object in __objects
             Args:
                 obj (object): new object to be set in __objects
 
         """
-
 
         """
               getting the key for the dictionary from objects class
@@ -53,7 +55,7 @@ class FileStorage:
         FileStorage.__objects[key] = obj
 
     def save(self):
-        """ 
+        """
             This method serializes the __objects to the
             __file_path("storage.json")
         """
@@ -67,7 +69,7 @@ class FileStorage:
             class attribute __objects each time save is called
         """
         with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            
+
             json.dump(new_dictionary, f)
 
     def reload(self):
