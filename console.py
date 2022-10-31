@@ -3,7 +3,7 @@
 
 
 import cmd
-
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     """ class inheriting from the Cmd class
@@ -36,6 +36,20 @@ class HBNBCommand(cmd.Cmd):
         print()
 
         return True
+
+    def do_create(self, line):
+        """ creates a new instance of BaseModel"""
+
+        if not line:
+            print("** class name missing **")
+
+        elif line != "BaseModel":
+            print("** class doesn't exist **")
+
+        else:
+            new_model = BaseModel()
+            print(new_model.id)
+            new_model.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
