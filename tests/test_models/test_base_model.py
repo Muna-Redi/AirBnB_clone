@@ -7,6 +7,7 @@ import inspect
 import pep8
 import unittest
 
+import models
 from models import base_model
 BaseModel = base_model.BaseModel
 
@@ -25,14 +26,14 @@ class Test_BaseModel_Doc(unittest.TestCase):
         style = pep8.StyleGuide(quiet=True)
         outcome = style.check_files(["models/base_model.py"])
         self.assertEqual(outcome.total_errors, 0,
-                        "Found code style error (and warnings).")
+                         "Found code style error (and warnings).")
 
     def test_pep8_conformance_test_base_model(self):
         """ Tests for pep8style conformance of the test_base_model"""
         style = pep8.StyleGuide(quiet=True)
         outcome = style.check_files(["tests/test_models/test_base_model.py"])
         self.assertEqual(outcome.total_errors, 0,
-                        "Found code style error (and warnings).")
+                         "Found code style error (and warnings).")
 
     def test_base_model_docstring(self):
         """ tests if the base_model module has a documentation """
@@ -47,6 +48,7 @@ class Test_BaseModel_Doc(unittest.TestCase):
 
         for method in self.bm:
             self.assertTrue(len(method[1].__doc__) >= 1)
+
 
 class TestBaseModel(unittest.Testcase):
     """ Class to test the BaseModel class """
@@ -76,7 +78,7 @@ class TestBaseModel(unittest.Testcase):
         """ tests str method """
         string = str(self.obj)
         objid = "[{}] ({}) {}".format(self.obj.__class__.__name__, self.obj.id,
-                                     self.obj.__dict__)
+                                      self.obj.__dict__)
         test = objid in string
         self.assertEqual(True, test)
         test = "updated_at" in string

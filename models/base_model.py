@@ -41,7 +41,7 @@ class BaseModel:
                     self.__dict__[key] = hold
 
                 elif key is "id":
-                    self.id == value
+                    self.id = value
                 else:
                     self.__dict__[key] = value
         else:
