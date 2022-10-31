@@ -6,6 +6,7 @@ import cmd
 from models import storage
 from models.base_model import BaseModel
 
+
 class HBNBCommand(cmd.Cmd):
     """ class inheriting from the Cmd class
         Attributes:
@@ -43,8 +44,8 @@ class HBNBCommand(cmd.Cmd):
         arg_list = line.split()
 
         if len(arg_list) < 2:
-             print("** instance id missing **")
-             return False
+            print("** instance id missing **")
+            return False
 
         objs = storage.all()
         key = "{}.{}".format(arg_list[0], arg_list[1])
@@ -53,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
             return False
         else:
             return True
-        
+
     def emptyline(self):
         """ method to do nothing when an empty line is parsed """
 
@@ -138,7 +139,7 @@ class HBNBCommand(cmd.Cmd):
         if anchor in objs.keys():
             setattr(objs[anchor], args[2], args[3])
         storage.save()
-        
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
