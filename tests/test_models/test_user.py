@@ -136,7 +136,7 @@ class TestUser_save(unittest.TestCase):
         us = User()
         us.save()
         usid = "User." + us.id
-        with open("file.json", "r") as f:
+        with open("storage.json", "r") as f:
             self.assertIn(usid, f.read())
 
 

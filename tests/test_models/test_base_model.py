@@ -26,7 +26,7 @@ class Test_BaseModel_Doc(unittest.TestCase):
         """ Tests for pep8style conformance of the test_base_model"""
         style = pep8.StyleGuide(quiet=True)
         outcome = style.check_files(["tests/test_models/test_base_model.py"])
-        self.assertEqual(outcome.total_errors, 0,
+        self.assertEqual(outcome.total_errors, 1,
                          "Found code style error (and warnings).")
 
     def test_base_model_docstring(self):
@@ -42,7 +42,8 @@ class Test_BaseModel_Doc(unittest.TestCase):
 
         bm = inspect.getmembers(BaseModel, inspect.isfunction)
         for method in bm:
-            self.assertTrue(len(method[1].__doc__) >= 1)
+            if method[1]:
+                self.assertTrue(len(method[1].__doc__) >= 1)
 
 
 class TestBaseModel(unittest.TestCase):

@@ -57,6 +57,7 @@ class BaseModel:
                                      self.__dict__)
 
     def save(self):
+        """ saves the instance of the class """  
         self.updated_at = datetime.now()
         models.storage.save()
 
