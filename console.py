@@ -157,9 +157,29 @@ class HBNBCommand(cmd.Cmd):
             setattr(objs[anchor], args[2], args[3])
         storage.save()
 
+    @staticmethod
+    def parse_line(line):
+        """ passes a string into command_and_arguments format """
+
+        tmp = line
+        for x in ['.', ',', ')', '(']:
+            lines = tmp.replace(x, " ")
+            tmp = lines
+        lines = lines.split()
+        if (len(lines) < 2) and (lines[0] not in HBNBCommand.classes):
+            print("** class doesn't exist **")
+            return
+        commands = lines[1]
+        for val in lines:
+            if val != lines[1]:
+                commands += " " + val
+        return commands
+
     def default(self, line):
         """ method to handle unrecognised commands """
-        pass
+        command = self.parse_line(line)
+        if command is not None:
+            HBNBCommand.onecmd(self, command)
 
 
 if __name__ == '__main__':

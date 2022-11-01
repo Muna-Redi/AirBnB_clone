@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Test for the the Base class """
+""" Tests for the the Base class """
 
 
 from datetime import datetime
