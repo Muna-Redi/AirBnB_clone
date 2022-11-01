@@ -32,12 +32,3 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = []
-    def __init__(self, *args, **kwargs):
-        """ method to initialize an instnce
-
-            Args:
-                args (list): list of arguments to be initialised to an instance
-                kwargs (dict): keyword arguments to the init method for instance
-                initialisation
-        """
-        super().__init__(args, kwargs)

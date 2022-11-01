@@ -17,13 +17,3 @@ class User(BaseModel):
     password = ""
     first_name = ""
     last_name = ""
-
-    def __init__(self, *args, **kwargs):
-        """ init method for class User 
-
-        Args:
-            args (list): list of argument to be initialised to an instnce
-            kwargs (dict): keyword arguments to the init method
-
-        """
-        super().__init__(args, kwargs)

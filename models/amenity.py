@@ -22,4 +22,4 @@ class Amenity(BaseModel):
                 kwargs (dict): dictionary of keyword arguments to
                 the init method
         """
-        super().__init__(args, kwargs)
+        super().__init__(*args, **kwargs)

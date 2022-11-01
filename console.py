@@ -66,7 +66,7 @@ class HBNBCommand(cmd.Cmd):
         objs = storage.all()
         key = "{}.{}".format(arg_list[0], arg_list[1])
         if key not in objs.keys():
-            print("** no instance id found **")
+            print("** no instance found **")
             return False
         else:
             return True
@@ -158,5 +158,3 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
 
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()

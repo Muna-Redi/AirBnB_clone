@@ -17,11 +17,3 @@ class Review(BaseModel):
     place_id = ""
     user_id = ""
     text = ""
-    def __init__(*args, **kwargs):
-        """ initialises a review instance
-
-            Args:
-                args (list): list of arguments to the init method
-                kwargs (dict): keyword arguments
-        """
-        super().__init__(args, kwargs)
