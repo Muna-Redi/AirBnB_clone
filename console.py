@@ -3,8 +3,15 @@
 
 
 import cmd
-from models import storage
+
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.state import State
+from models import storage
+from models.user import User
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -21,6 +28,7 @@ class HBNBCommand(cmd.Cmd):
             do_quit: method to quit the program
     """
     prompt = "(hbnb)"
+    classes = ["BaseModel", "User"]
 
     @staticmethod
     def check_class(line):
@@ -32,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
 
-        elif arg_list[0] != "BaseModel":
+        elif arg_list[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return False
 
@@ -73,10 +81,11 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, line):
-        """ creates a new instance of BaseModel"""
+        """ creates a new instance of a class"""
 
         if self.check_class(line) is True:
-            new_model = BaseModel()
+            args = line.split()
+            new_model = eval(args[0] + '()')
             new_model.save()
             print(new_model.id)
 
@@ -116,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
 
         objs = storage.all()
         for key, value in objs.items():
-            if isinstance(value, BaseModel):
+            if line.split()[0] in HBNBCommand.classes:
                 print(value.__str__())
 
     def do_update(self, line):
