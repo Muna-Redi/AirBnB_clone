@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-""" The module for state class """
+""" The module for City class """
 
 
 from models.base_model import BaseModel
 
 
-class State(BaseModel):
+class City(BaseModel):
     """ State class inherits from BaseModel
 
     Attributes:
-        name (str): state's name
+        state_id (str): holds the state id from state.id
+        name (str): city's name
     """
+    state_id = ""
     name = ""
 
     def __init__(self, *args, **kwargs):

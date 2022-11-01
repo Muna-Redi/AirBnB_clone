@@ -28,7 +28,15 @@ class HBNBCommand(cmd.Cmd):
             do_quit: method to quit the program
     """
     prompt = "(hbnb)"
-    classes = ["BaseModel", "User"]
+    classes = [
+        "Amenity",
+        "BaseModel",
+        "City",
+        "Place",
+        "State",
+        "User",
+        "Review"
+    ]
 
     @staticmethod
     def check_class(line):
