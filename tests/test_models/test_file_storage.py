@@ -45,6 +45,7 @@ class Test_FileStorage_Doc(unittest.TestCase):
         for method in bm:
             self.assertTrue(len(method[1].__doc__) >= 1)
 
+
 class Test_FileStorage(unittest.TestCase):
     """ Tests for the class FileStorage attributes and methods """
 
@@ -76,7 +77,7 @@ class Test_FileStorage(unittest.TestCase):
         bad_key = 'BaseModel.112345678909876543'
         try:
             self.assertRaises(json_dict[bad_key], KeyError)
-        except:
+        except KeyError:
             pass
 
     def test_reload(self):
@@ -90,7 +91,7 @@ class Test_FileStorage(unittest.TestCase):
         bad_key = 'BaseModel.112345678909876543'
         try:
             self.assertRaises(obj_dict[bad_key], KeyError)
-        except:
+        except KeyError:
             pass
 
     def test_FileStorage_delete_functionality(self):
@@ -106,7 +107,7 @@ class Test_FileStorage(unittest.TestCase):
 
         try:
             self.assertRaises(obj_dict[anchor], KeyError)
-        except:
+        except KeyError:
             pass
 
     def test_FileStorage_new_with_valid_object(self):
@@ -122,5 +123,5 @@ class Test_FileStorage(unittest.TestCase):
         try:
             self.assertRaises(storage.new('Francis'), TypeError)
             self.assertRaises(storage.new(None), TypeError)
-        except:
+        except Exception:
             pass
