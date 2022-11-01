@@ -157,6 +157,10 @@ class HBNBCommand(cmd.Cmd):
             setattr(objs[anchor], args[2], args[3])
         storage.save()
 
+    def default(self, line):
+        """ method to handle unrecognised commands """
+        pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
