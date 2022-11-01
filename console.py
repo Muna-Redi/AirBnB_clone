@@ -157,6 +157,18 @@ class HBNBCommand(cmd.Cmd):
             setattr(objs[anchor], args[2], args[3])
         storage.save()
 
+    def do_count(self, line):
+        """ counts and prints the number of instances of a class """
+        if self.check_class is False:
+            return
+        count = 0
+        args = line.split()
+        objs = storage.all()
+        for key, obj in objs.items():
+            if args[0] == (obj.__dict__)["__class__"]:
+                count += 1
+        print(count)
+
     @staticmethod
     def parse_line(line):
         """ passes a string into command_and_arguments format """
@@ -168,6 +180,8 @@ class HBNBCommand(cmd.Cmd):
         lines = lines.split()
         if (len(lines) < 2) and (lines[0] not in HBNBCommand.classes):
             print("** class doesn't exist **")
+            return
+        if len(lines) == 1:
             return
         commands = lines[1]
         for val in lines:
