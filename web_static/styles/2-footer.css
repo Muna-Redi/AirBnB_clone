@@ -1,0 +1,13 @@
+footer {
+	background-color:#00FF00;
+	height:60px;
+	width:100%;
+	position:fixed;
+	bottom:0px;
+	}
+
+footer div {
+	margin-top:20px;
+	margin-bottom:20px;
+	text-align:center;
+}
